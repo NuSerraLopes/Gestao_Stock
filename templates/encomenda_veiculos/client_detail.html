@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{{ object.name }}</h2>
+  <p>Code: {{ object.code }}</p>
+  <p>NIF: {{ object.nif }}</p>
+  <p>Address: {{ object.address }}</p>
+  <p>Postal Code: {{ object.postal_code }}</p>
+  <p>City: {{ object.city }}</p>
+  <p>Phone: {{ object.phone }}</p>
+  <p>Email: {{ object.email }}</p>
+  <p>Distributor: {{ object.distributor }}</p>
+  <p>Seller: {{ object.seller }}</p>
+
+  <a href="{% url 'Encomenda_Veiculos:client_update' object.pk %}">Edit</a>
+  <a href="{% url 'Encomenda_Veiculos:client_delete' object.pk %}">Delete</a>
+{% endblock %}

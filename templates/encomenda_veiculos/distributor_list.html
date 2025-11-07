@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Distributors</h2>
+  <a href="{% url 'Encomenda_Veiculos:distributor_create' %}">Create New Distributor</a>
+  <ul>
+    {% for distributor in object_list %}
+      <li>
+        <a href="{% url 'Encomenda_Veiculos:distributor_detail' distributor.pk %}">{{ distributor.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

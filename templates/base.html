@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Encomenda de Veículos</title>
+  <title>Encomenda de Veiculos</title>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/vehicles/create">Create Vehicle</a></li>
-            <li><a href="/vps/create">Create VP</a></li>
-            <li><a href="/ocf/modify">Modify OCF</a></li>
-            <li><a href="/clients/add">Add Client</a></li>
-        </ul>
-    </nav>
-    <div class="container">
-        {% block content %}{% endblock %}
-    </div>
+  <nav>
+    <ul>
+      <li><a href="{% url 'Encomenda_Veiculos:client_list' %}">Clients</a></li>
+      <li><a href="{% url 'Encomenda_Veiculos:vp_list' %}">VPs</a></li>
+      <li><a href="{% url 'Encomenda_Veiculos:ocf_list' %}">OCFs</a></li>
+      <li><a href="{% url 'Encomenda_Veiculos:distributor_list' %}">Distributors</a></li>
+    </ul>
+  </nav>
+  {% block content %}
+  {% endblock %}
 </body>
 </html>
