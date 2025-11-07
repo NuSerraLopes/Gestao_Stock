@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{{ object.vehicle }}</h2>
+    <p>Origin: {{ object.origin }}</p>
+    <p>Destination: {{ object.destination }}</p>
+    <p>Date: {{ object.date }}</p>
+    <a href="{% url 'Encomenda_Veiculos:internaltransport_update' object.pk %}">Edit</a>
+    <a href="{% url 'Encomenda_Veiculos:internaltransport_delete' object.pk %}">Delete</a>
+{% endblock %}

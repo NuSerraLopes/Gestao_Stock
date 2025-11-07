@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{{ object.name }}</h2>
+    <p>Email: {{ object.email }}</p>
+    <p>Phone: {{ object.phone }}</p>
+    <a href="{% url 'Encomenda_Veiculos:clientcontact_update' object.pk %}">Edit</a>
+    <a href="{% url 'Encomenda_Veiculos:clientcontact_delete' object.pk %}">Delete</a>
+{% endblock %}

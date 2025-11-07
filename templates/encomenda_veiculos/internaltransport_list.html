@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Internal Transports</h2>
+    <ul>
+        {% for internaltransport in object_list %}
+            <li><a href="{% url 'Encomenda_Veiculos:internaltransport_detail' internaltransport.pk %}">{{ internaltransport.vehicle }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'Encomenda_Veiculos:internaltransport_create' %}">Add Internal Transport</a>
+{% endblock %}

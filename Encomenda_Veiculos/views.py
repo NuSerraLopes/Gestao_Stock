@@ -3,6 +3,9 @@ from .models import OCFStock, Client, Vehicle, VP, Salesperson, ClientContact, I
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
+def home(request):
+    return render(request, 'encomenda_veiculos/home.html')
+
 # Client Views
 class ClientListView(ListView):
     model = Client

@@ -4,6 +4,7 @@ from . import views
 app_name = 'Encomenda_Veiculos'
 
 urlpatterns = [
+    path('', views.home, name='home'),
     # Client URLs
     path('clients/', views.ClientListView.as_view(), name='client_list'),
     path('clients/<int:pk>/', views.ClientDetailView.as_view(), name='client_detail'),

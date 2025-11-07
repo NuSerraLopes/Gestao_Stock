@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>OCF Stock</h2>
+    <ul>
+        {% for ocfstock in object_list %}
+            <li><a href="{% url 'Encomenda_Veiculos:ocfstock_detail' ocfstock.pk %}">{{ ocfstock.vehicle }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'Encomenda_Veiculos:ocfstock_create' %}">Add OCF Stock</a>
+{% endblock %}

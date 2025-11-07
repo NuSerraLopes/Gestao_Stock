@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Salespeople</h2>
+    <ul>
+        {% for salesperson in object_list %}
+            <li><a href="{% url 'Encomenda_Veiculos:salesperson_detail' salesperson.pk %}">{{ salesperson.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'Encomenda_Veiculos:salesperson_create' %}">Add Salesperson</a>
+{% endblock %}

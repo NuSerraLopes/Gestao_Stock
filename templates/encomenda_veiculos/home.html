@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Welcome to the Vehicle Ordering System</h1>
+<div class="jumbotron">
+  <h1 class="display-4">Welcome to Gestão de Stock</h1>
+  <p class="lead">This is a simple application to manage vehicle stock.</p>
+  <hr class="my-4">
+  <p>You can manage clients, vehicles, and other entities.</p>
+  <a class="btn btn-primary btn-lg" href="{% url 'Encomenda_Veiculos:client_list' %}" role="button">View Clients</a>
+</div>
 {% endblock %}

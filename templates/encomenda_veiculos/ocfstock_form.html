@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Modify OCF</h2>
+    <h2>{% if object %}Edit{% else %}Create{% endif %} OCF Stock</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
