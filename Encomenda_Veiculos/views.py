@@ -19,7 +19,11 @@ def home(request):
     return render(request, 'encomenda_veiculos/home.html')
 
 @login_required
-def import_data(request):
+def import_hub(request):
+    return render(request, 'encomenda_veiculos/import_hub.html')
+
+@login_required
+def import_stock(request):
     if request.method == 'POST':
         form = ImportFileForm(request.POST, request.FILES)
         if form.is_valid():

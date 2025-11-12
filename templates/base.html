@@ -27,7 +27,19 @@
                         <a class="nav-link" href="{% url 'Encomenda_Veiculos:salesperson_list' %}">{% translate "Salespersons" %}</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Encomenda_Veiculos:clientcontact_list' %}">{% translate "Client Contacts" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Encomenda_Veiculos:internaltransport_list' %}">{% translate "Internal Transports" %}</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'Encomenda_Veiculos:ocfstock_list' %}">{% translate "OCF Stock" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Encomenda_Veiculos:vp_list' %}">{% translate "VPs" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Encomenda_Veiculos:import_hub' %}">{% translate "Imports" %}</a>
                     </li>
                 {% endif %}
             </ul>

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "Imports" %}{% endblock %}
+
+{% block content %}
+    <h1>{% translate "Available Imports" %}</h1>
+    <hr>
+    <div class="list-group">
+        <a href="{% url 'Encomenda_Veiculos:import_stock' %}" class="list-group-item list-group-item-action">
+            {% translate "OCF Stock Import" %}
+        </a>
+        <!-- Add more import links here as needed -->
+    </div>
+{% endblock %}

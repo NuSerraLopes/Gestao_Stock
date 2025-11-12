@@ -6,7 +6,8 @@ app_name = 'Encomenda_Veiculos'
 urlpatterns = [
     path('login/', views.CustomLoginView.as_view(), name='login'),
     path('logout/', views.CustomLogoutView.as_view(), name='logout'),
-    path('import/', views.import_data, name='import_data'),
+    path('stockimport/', views.import_stock, name='import_stock'),
+    path('imports/', views.import_hub, name='import_hub'),
 
     path('', views.home, name='home'),
     # Client URLs
