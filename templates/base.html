@@ -1,12 +1,11 @@
-{% load i18n %}
 {% load static %}
-
+{% load i18n %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% translate "Demo Booking App" %}{% endblock %}</title>
+    <title>{% block title %}{% translate "Vehicle Ordering App" %}{% endblock %}</title>
 
     <!-- Bootstrap CSS from local static file -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
@@ -16,40 +15,99 @@
 
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/ico">
 </head>
-<body>
-    <div class="container">
-        <nav>
-            <ul>
-                <li><a href="{% url 'Encomenda_Veiculos:home' %}">{% translate "Home" %}</a></li>
-                <li><a href="{% url 'Encomenda_Veiculos:salesperson_list' %}">{% translate "Salespersons" %}</a></li>
-                <li><a href="{% url 'Encomenda_Veiculos:clientcontact_list' %}">{% translate "Client Contacts" %}</a></li>
-                <li><a href="{% url 'Encomenda_Veiculos:internaltransport_list' %}">{% translate "Internal Transports" %}</a></li>
-                <li><a href="{% url 'Encomenda_Veiculos:ocfstock_list' %}">{% translate "OCF Stock" %}</a></li>
-                <li><a href="{% url 'Encomenda_Veiculos:vp_list' %}">{% translate "VPs" %}</a></li>
-            </ul>
-            <div class="language-switcher">
-                {% get_current_language as current_language %}
-                <form action="/i18n/setlang/" method="post">
-                    {% csrf_token %}
-                    <input name="next" type="hidden" value="{{ request.get_full_path|urlencode }}">
-                    <select name="language" onchange="this.form.submit()">
-                        {% get_available_languages as languages %}
-                        {% for lang_code, lang_name in languages %}
-                            <option value="{{ lang_code }}" {% if lang_code == current_language %}selected{% endif %}>
-                                {% if lang_code == 'pt' %}
-                                    <img src="{% static 'flags/pt.png' %}" alt="Português">
-                                {% elif lang_code == 'en' %}
-                                    <img src="{% static 'flags/uk.png' %}" alt="English">
-                                {% endif %}
-                                {{ lang_name }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </form>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'Encomenda_Veiculos:home' %}">
+                <img src="{% static 'images/Logo.svg' %}" alt="{% translate 'VehicleApp Logo' %}" style="height: 30px; width: auto;">
+                {% translate "Vehicle Ordering" %}
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Encomenda_Veiculos:client_list' %}">{% translate "Clients" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Encomenda_Veiculos:salesperson_list' %}">{% translate "Salespersons" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Encomenda_Veiculos:clientcontact_list' %}">{% translate "Client Contacts" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Encomenda_Veiculos:internaltransport_list' %}">{% translate "Internal Transports" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Encomenda_Veiculos:ocfstock_list' %}">{% translate "OCF Stock" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Encomenda_Veiculos:vp_list' %}">{% translate "VPs" %}</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center">
+                    <div class="nav-item dropdown ms-3">
+                        <button class="btn nav-link dropdown-toggle text-white" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" type="button" style="background: transparent; border: none; padding: 0;">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            <img src="{% if LANGUAGE_CODE == 'pt' %}{% static 'flags/pt.png' %}{% else %}{% static 'flags/uk.png' %}{% endif %}" alt="Language" class="flag-icon">
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                            <li>
+                                <form action="{% url 'set_language' %}" method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                                    <input type="hidden" name="language" value="en">
+                                    <button type="submit" class="dropdown-item">
+                                        <img src="{% static 'flags/uk.png' %}" alt="English" class="flag-icon me-2"> English
+                                    </button>
+                                </form>
+                            </li>
+                            <li>
+                                <form action="{% url 'set_language' %}" method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                                    <input type="hidden" name="language" value="pt">
+                                    <button type="submit" class="dropdown-item">
+                                        <img src="{% static 'flags/pt.png' %}" alt="Português" class="flag-icon me-2"> Português
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </nav>
-        {% block content %}
-        {% endblock %}
-    </div>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        {# --- Django Messages Display --- #}
+        {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="mb-1">
+                &copy; {% now "Y" %} {% translate "My Company. All Rights Reserved."%}
+            </p>
+        </div>
+    </footer>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    {% block scripts %}
+    {# Child templates can inject their specific scripts here #}
+    {% endblock scripts %}
+
 </body>
 </html>
