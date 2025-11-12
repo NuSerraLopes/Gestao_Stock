@@ -44,12 +44,12 @@ class Salesperson(models.Model):
         return self.user.get_full_name() or self.user.username
 
 class Client(models.Model):
-
-    code = models.CharField(primary_key=True,max_length=64, unique=True, db_column="Cliente_Codice")
+    id = models.BigAutoField(primary_key=True)
+    code = models.CharField(max_length=6, unique=True, editable=False, db_column="Cliente_Codice")
     name = models.CharField(max_length=200, db_column="Cliente_Nome")
 
     nif = models.CharField(
-        max_length=9, null=True, blank=True, db_column="NIF",
+        max_length=9, null=False, blank=False, unique=True, db_column="NIF",
         validators=[PT_NIF_REGEX],
         help_text="Portuguese taxpayer number (9 digits)."
     )
@@ -69,10 +69,13 @@ class Client(models.Model):
     distributor = models.CharField(max_length=120, null=True, blank=True, db_column="Distribuidor")
     seller = models.CharField(max_length=120, null=True, blank=True, db_column="Vendedor")
 
-    # For initial data import from Access, keep nullable.
-    # After import, you can switch to auto_now=True if desired.
     updated_at = models.DateTimeField(null=True, blank=True, db_column="Ultimo_Atualizar")
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.code and self.nif:
+            self.code = self.nif[-6:]
+        super().save(*args, **kwargs)
 
     class Meta:
         db_table = "client"
@@ -81,14 +84,6 @@ class Client(models.Model):
             models.Index(fields=["name"]),
             models.Index(fields=["code"]),
             models.Index(fields=["nif"]),
-        ]
-        constraints = [
-            # NIF unique when present
-            models.UniqueConstraint(
-                fields=["nif"],
-                name="uniq_client_nif_not_null",
-                condition=models.Q(nif__isnull=False),
-            ),
         ]
 
     def __str__(self):
@@ -131,19 +126,16 @@ class ClientContact(models.Model):
             models.Index(fields=["client", "phone"]),
         ]
         constraints = [
-            # Email unique per client when present
             models.UniqueConstraint(
                 fields=["client", "email"],
                 name="uniq_client_contact_email",
                 condition=models.Q(email__isnull=False),
             ),
-            # Phone unique per client when present
             models.UniqueConstraint(
                 fields=["client", "phone"],
                 name="uniq_client_contact_phone",
                 condition=models.Q(phone__isnull=False),
             ),
-            # Only one primary contact per client
             models.UniqueConstraint(
                 fields=["client", "is_primary"],
                 name="uniq_client_primary_contact",
@@ -155,10 +147,10 @@ class ClientContact(models.Model):
         return f"{self.name} ({self.client.name})"
 
 class VP(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    vp_code = models.CharField(max_length=255, unique=True, db_column="VP Codice")
 
-    vp_code = models.CharField(primary_key=True,max_length=255, unique=True, db_column="VP Codice")
-
-    # Core configuration characteristics (moved here from Vehicle)
+    # Core configuration characteristics
     variant = models.CharField(max_length=255, null=True, blank=True, db_column="Variante")
     version = models.CharField(max_length=255, null=True, blank=True, db_column="Versão")
     homologation = models.CharField(max_length=255, null=True, blank=True, db_column="Homologação")
@@ -166,7 +158,7 @@ class VP(models.Model):
     tare_kg = models.IntegerField(null=True, blank=True, db_column="TARA")
     engine_code = models.CharField(max_length=255, null=True, blank=True, db_column="Motore_V")
 
-    # Commercial codes (one per concept; all belong to the configuration)
+    # Commercial codes
     gama = models.CharField(max_length=255, null=True, blank=True, db_column="GAMA")
     modelo = models.CharField(max_length=255, null=True, blank=True, db_column="MODELO")
     cabina = models.CharField(max_length=255, null=True, blank=True, db_column="CABINA")
@@ -176,11 +168,10 @@ class VP(models.Model):
     dee = models.IntegerField(null=True, blank=True, db_column="DEE")
     hi = models.CharField(max_length=255, null=True, blank=True, db_column="HI")
 
-    # Color as part of configuration (if paint is chosen at config time)
+    # Color
     color_code_numeric = models.IntegerField(null=True, blank=True, db_column="Colore_Codice (Numerico)")
     color_desc = models.CharField(max_length=255, null=True, blank=True, db_column="Colore_Descrizione Estesa")
 
-    # Optional free-text describing the configuration
     notas_vp = models.TextField(null=True, blank=True, db_column="NOTAS_VP")
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -205,25 +196,21 @@ class Vehicle(models.Model):
 
     van = models.IntegerField(primary_key=True,unique=True, db_column="VAN")
 
-    # VIN appears after production
     vin = models.CharField(
         max_length=17, null=True, blank=True, db_column="VIN",
         validators=[VIN_REGEX]
     )
 
-    # Registration / per-vehicle facts
     plate = models.CharField(
         max_length=20, null=True, blank=True, db_column="MATRICULA",
         validators=[PLATE_REGEX]
     )
     registration_date = models.DateField(null=True, blank=True, db_column="DATA_MATRICULA")
 
-    # Production facts tied to the unit (not the config)
     lot = models.IntegerField(null=True, blank=True, db_column="LOT")
     country = models.CharField(max_length=255, null=True, blank=True, db_column="Country")
     production_year = models.DateField(null=True, blank=True, db_column="ANO_PROD")
 
-    # Campaign flags per vehicle
     has_service_campaign = models.BooleanField(default=False, null=True, blank=True, db_column="CAMPANHA_SERVICE")
     service_campaign_date = models.DateField(null=True, blank=True, db_column="CAMPANHA_SERVICE_DATA")
     service_campaign_due = models.DateField(null=True, blank=True, db_column="CAMPANHA_SERVICE_PREV")
@@ -294,7 +281,6 @@ class InternalTransport(models.Model):
 class OCFStock(models.Model):
     id = models.BigAutoField(primary_key=True)
 
-    # Link to vehicle (each OCF entry tracks one vehicle in stock/sales pipeline)
     vehicle = models.OneToOneField(
         Vehicle,
         on_delete=models.CASCADE,
@@ -374,4 +360,3 @@ class OCFStock(models.Model):
 
     def __str__(self):
         return f"OCF {self.vehicle.van} ({'Sold' if self.sold else 'Stock'})"
-
