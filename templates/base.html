@@ -2,18 +2,21 @@
 <html>
 <head>
     <title>Encomenda Veiculos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="{% url 'Encomenda_Veiculos:home' %}">Home</a></li>
-            <li><a href="{% url 'Encomenda_Veiculos:salesperson_list' %}">Salespersons</a></li>
-            <li><a href="{% url 'Encomenda_Veiculos:clientcontact_list' %}">Client Contacts</a></li>
-            <li><a href="{% url 'Encomenda_Veiculos:internaltransport_list' %}">Internal Transports</a></li>
-            <li><a href="{% url 'Encomenda_Veiculos:ocfstock_list' %}">OCF Stock</a></li>
-        </ul>
-    </nav>
-    {% block content %}
-    {% endblock %}
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="{% url 'Encomenda_Veiculos:home' %}">Home</a></li>
+                <li><a href="{% url 'Encomenda_Veiculos:salesperson_list' %}">Salespersons</a></li>
+                <li><a href="{% url 'Encomenda_Veiculos:clientcontact_list' %}">Client Contacts</a></li>
+                <li><a href="{% url 'Encomenda_Veiculos:internaltransport_list' %}">Internal Transports</a></li>
+                <li><a href="{% url 'Encomenda_Veiculos:ocfstock_list' %}">OCF Stock</a></li>
+            </ul>
+        </nav>
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 </html>

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import OCFStock, Client, Vehicle, VP, Salesperson, ClientContact, InternalTransport
+from .forms import OCFStockForm, ClientForm, VehicleForm, VPForm, SalespersonForm, ClientContactForm, InternalTransportForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
@@ -17,13 +18,13 @@ class ClientDetailView(DetailView):
 
 class ClientCreateView(CreateView):
     model = Client
-    fields = '__all__'
+    form_class = ClientForm
     template_name = 'encomenda_veiculos/client_form.html'
     success_url = reverse_lazy('Encomenda_Veiculos:client_list')
 
 class ClientUpdateView(UpdateView):
     model = Client
-    fields = '__all__'
+    form_class = ClientForm
     template_name = 'encomenda_veiculos/client_form.html'
     success_url = reverse_lazy('Encomenda_Veiculos:client_list')
 
@@ -43,13 +44,13 @@ class VPDetailView(DetailView):
 
 class VPCreateView(CreateView):
     model = VP
-    fields = '__all__'
+    form_class = VPForm
     template_name = 'encomenda_veiculos/vp_form.html'
     success_url = reverse_lazy('Encomenda_Veiculos:vp_list')
 
 class VPUpdateView(UpdateView):
     model = VP
-    fields = '__all__'
+    form_class = VPForm
     template_name = 'encomenda_veiculos/vp_form.html'
     success_url = reverse_lazy('Encomenda_Veiculos:vp_list')
 
@@ -69,13 +70,13 @@ class OCFStockDetailView(DetailView):
 
 class OCFStockCreateView(CreateView):
     model = OCFStock
-    fields = '__all__'
+    form_class = OCFStockForm
     template_name = 'encomenda_veiculos/ocfstock_form.html'
     success_url = reverse_lazy('Encomenda_Veiculos:ocfstock_list')
 
 class OCFStockUpdateView(UpdateView):
     model = OCFStock
-    fields = '__all__'
+    form_class = OCFStockForm
     template_name = 'encomenda_veiculos/ocfstock_form.html'
     success_url = reverse_lazy('Encomenda_Veiculos:ocfstock_list')
 
@@ -95,13 +96,13 @@ class SalespersonDetailView(DetailView):
 
 class SalespersonCreateView(CreateView):
     model = Salesperson
-    fields = '__all__'
+    form_class = SalespersonForm
     template_name = 'encomenda_veiculos/salesperson_form.html'
     success_url = reverse_lazy('Encomenda_Veiculos:salesperson_list')
 
 class SalespersonUpdateView(UpdateView):
     model = Salesperson
-    fields = '__all__'
+    form_class = SalespersonForm
     template_name = 'encomenda_veiculos/salesperson_form.html'
     success_url = reverse_lazy('Encomenda_Veiculos:salesperson_list')
 
@@ -121,13 +122,13 @@ class ClientContactDetailView(DetailView):
 
 class ClientContactCreateView(CreateView):
     model = ClientContact
-    fields = '__all__'
+    form_class = ClientContactForm
     template_name = 'encomenda_veiculos/clientcontact_form.html'
     success_url = reverse_lazy('Encomenda_Veiculos:clientcontact_list')
 
 class ClientContactUpdateView(UpdateView):
     model = ClientContact
-    fields = '__all__'
+    form_class = ClientContactForm
     template_name = 'encomenda_veiculos/clientcontact_form.html'
     success_url = reverse_lazy('Encomenda_Veiculos:clientcontact_list')
 
@@ -147,13 +148,13 @@ class InternalTransportDetailView(DetailView):
 
 class InternalTransportCreateView(CreateView):
     model = InternalTransport
-    fields = '__all__'
+    form_class = InternalTransportForm
     template_name = 'encomenda_veiculos/internaltransport_form.html'
     success_url = reverse_lazy('Encomenda_Veiculos:internaltransport_list')
 
 class InternalTransportUpdateView(UpdateView):
     model = InternalTransport
-    fields = '__all__'
+    form_class = InternalTransportForm
     template_name = 'encomenda_veiculos/internaltransport_form.html'
     success_url = reverse_lazy('Encomenda_Veiculos:internaltransport_list')
 
