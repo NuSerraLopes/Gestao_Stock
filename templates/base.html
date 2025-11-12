@@ -42,10 +42,10 @@
                     <div class="dropdown-menu" aria-labelledby="languageDropdown">
                         {% get_available_languages as LANGUAGES %}
                         {% for lang_code, lang_name in LANGUAGES %}
-                            <form action="{% url 'Encomenda_Veiculos:set_language' %}" method="post" class="dropdown-item-form">
+                            <form action="/i18n/setlang/" method="post" class="dropdown-item-form">
                                 {% csrf_token %}
                                 <input type="hidden" name="language" value="{{ lang_code }}">
-                                <input type="hidden" name="next" value="{{ request.path }}">
+                                <input name="next" type="hidden" value="{{ redirect_to }}" />
                                 <button type="submit" class="dropdown-item">{{ lang_name }}</button>
                             </form>
                         {% endfor %}

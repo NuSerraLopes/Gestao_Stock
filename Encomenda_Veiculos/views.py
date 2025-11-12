@@ -6,20 +6,11 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.utils.translation import activate, get_language
 
 
 @login_required
 def home(request):
     return render(request, 'encomenda_veiculos/home.html')
-
-def set_language(request):
-    if request.method == 'POST':
-        language = request.POST.get('language')
-        if language:
-            activate(language)
-            request.session[get_language()] = language
-    return redirect(request.POST.get('next', '/'))
 
 class CustomLoginView(LoginView):
     template_name = 'encomenda_veiculos/login.html'
