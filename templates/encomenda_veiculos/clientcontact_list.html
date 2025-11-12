@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
-    <h2>Client Contacts</h2>
+    <h2>{% translate "Client Contacts" %}</h2>
     <ul>
         {% for clientcontact in object_list %}
             <li><a href="{% url 'Encomenda_Veiculos:clientcontact_detail' clientcontact.pk %}">{{ clientcontact.name }}</a></li>
         {% endfor %}
     </ul>
-    <a href="{% url 'Encomenda_Veiculos:clientcontact_create' %}">Add Client Contact</a>
+    <a href="{% url 'Encomenda_Veiculos:clientcontact_create' %}">{% translate "Add Client Contact" %}</a>
 {% endblock %}

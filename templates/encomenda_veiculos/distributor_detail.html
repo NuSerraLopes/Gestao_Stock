@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
   <h2>{{ object.name }}</h2>
-  <p>Code: {{ object.code }}</p>
+  <p>{% translate "Code" %}: {{ object.code }}</p>
 
-  <a href="{% url 'Encomenda_Veiculos:distributor_update' object.pk %}">Edit</a>
-  <a href="{% url 'Encomenda_Veiculos:distributor_delete' object.pk %}">Delete</a>
+  <a href="{% url 'Encomenda_Veiculos:distributor_update' object.pk %}">{% translate "Edit" %}</a>
+  <a href="{% url 'Encomenda_Veiculos:distributor_delete' object.pk %}">{% translate "Delete" %}</a>
 {% endblock %}

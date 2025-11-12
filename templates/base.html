@@ -1,3 +1,6 @@
+{% load i18n %}
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,13 +20,33 @@
     <div class="container">
         <nav>
             <ul>
-                <li><a href="{% url 'Encomenda_Veiculos:home' %}">Home</a></li>
-                <li><a href="{% url 'Encomenda_Veiculos:salesperson_list' %}">Salespersons</a></li>
-                <li><a href="{% url 'Encomenda_Veiculos:clientcontact_list' %}">Client Contacts</a></li>
-                <li><a href="{% url 'Encomenda_Veiculos:internaltransport_list' %}">Internal Transports</a></li>
-                <li><a href="{% url 'Encomenda_Veiculos:ocfstock_list' %}">OCF Stock</a></li>
-                <li><a href="{% url 'Encomenda_Veiculos:vp_list' %}">VPs</a></li>
+                <li><a href="{% url 'Encomenda_Veiculos:home' %}">{% translate "Home" %}</a></li>
+                <li><a href="{% url 'Encomenda_Veiculos:salesperson_list' %}">{% translate "Salespersons" %}</a></li>
+                <li><a href="{% url 'Encomenda_Veiculos:clientcontact_list' %}">{% translate "Client Contacts" %}</a></li>
+                <li><a href="{% url 'Encomenda_Veiculos:internaltransport_list' %}">{% translate "Internal Transports" %}</a></li>
+                <li><a href="{% url 'Encomenda_Veiculos:ocfstock_list' %}">{% translate "OCF Stock" %}</a></li>
+                <li><a href="{% url 'Encomenda_Veiculos:vp_list' %}">{% translate "VPs" %}</a></li>
             </ul>
+            <div class="language-switcher">
+                {% get_current_language as current_language %}
+                <form action="/i18n/setlang/" method="post">
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ request.path }}">
+                    <select name="language" onchange="this.form.submit()">
+                        {% get_available_languages as languages %}
+                        {% for lang_code, lang_name in languages %}
+                            <option value="{{ lang_code }}" {% if lang_code == current_language %}selected{% endif %}>
+                                {% if lang_code == 'pt' %}
+                                    <img src="{% static 'flags/pt.png' %}" alt="Português">
+                                {% elif lang_code == 'en' %}
+                                    <img src="{% static 'flags/uk.png' %}" alt="English">
+                                {% endif %}
+                                {{ lang_name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
         </nav>
         {% block content %}
         {% endblock %}

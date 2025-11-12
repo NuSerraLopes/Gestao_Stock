@@ -3,37 +3,40 @@ from django.conf import settings
 from django.db import models
 from django.core.validators import RegexValidator
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
-PT_NIF_REGEX = RegexValidator(regex=r"^\d{9}$", message="NIF must be 9 digits.")
-PT_POSTAL_REGEX = RegexValidator(regex=r"^\d{4}-\d{3}$", message="Postal code must be NNNN-NNN.")
-PHONE_REGEX = RegexValidator(regex=r"^[0-9+\-\s().]{7,20}$", message="Invalid phone number format.")
+PT_NIF_REGEX = RegexValidator(regex=r"^\d{9}$", message=_("NIF must be 9 digits."))
+PT_POSTAL_REGEX = RegexValidator(regex=r"^\d{4}-\d{3}$", message=_("Postal code must be NNNN-NNN."))
+PHONE_REGEX = RegexValidator(regex=r"^[0-9+\-\s().]{7,20}$", message=_("Invalid phone number format."))
 
 VIN_REGEX = RegexValidator(
     regex=r"^[A-HJ-NPR-Z0-9]{11,17}$",
-    message="VIN must be 11–17 characters (alphanumeric, excluding I/O/Q)."
+    message=_("VIN must be 11–17 characters (alphanumeric, excluding I/O/Q).")
 )
 PLATE_REGEX = RegexValidator(
     regex=r"^[A-Z0-9\- ]{5,15}$",
-    message="License plate should be 5–15 chars (letters/digits/hyphens/spaces)."
-)
+    message=_("License plate should be 5–15 chars (letters/digits/hyphens/spaces)."
+))
 
 class Salesperson(models.Model):
-    # Link to Django's built-in User
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="salesperson_profile",
-        help_text="User account for this salesperson."
+        verbose_name=_("User"),
+        help_text=_("User account for this salesperson.")
     )
 
-    distributor = models.CharField(max_length=255, null=True, blank=True, db_column="DISTRIBUIDOR")
-    active = models.BooleanField(default=True, db_column="ATIVO")
+    distributor = models.CharField(max_length=255, null=True, blank=True, db_column="DISTRIBUIDOR", verbose_name=_("Distributor"))
+    active = models.BooleanField(default=True, db_column="ATIVO", verbose_name=_("Active"))
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated At"))
 
     class Meta:
         db_table = "salesperson"
+        verbose_name = _("Salesperson")
+        verbose_name_plural = _("Salespeople")
         ordering = ["user__username"]
         indexes = [
             models.Index(fields=["distributor"]),
@@ -45,32 +48,35 @@ class Salesperson(models.Model):
 
 class Client(models.Model):
     id = models.BigAutoField(primary_key=True)
-    code = models.CharField(max_length=6, unique=True, editable=False, db_column="Cliente_Codice")
-    name = models.CharField(max_length=200, db_column="Cliente_Nome")
+    code = models.CharField(max_length=6, unique=True, editable=False, db_column="Cliente_Codice", verbose_name=_("Code"))
+    name = models.CharField(max_length=200, db_column="Cliente_Nome", verbose_name=_("Name"))
 
     nif = models.CharField(
         max_length=9, null=False, blank=False, unique=True, db_column="NIF",
         validators=[PT_NIF_REGEX],
-        help_text="Portuguese taxpayer number (9 digits)."
+        verbose_name=_("NIF"),
+        help_text=_("Portuguese taxpayer number (9 digits).")
     )
-    address = models.CharField(max_length=255, null=True, blank=True, db_column="Morada")
+    address = models.CharField(max_length=255, null=True, blank=True, db_column="Morada", verbose_name=_("Address"))
     postal_code = models.CharField(
         max_length=8, null=True, blank=True, db_column="Cod_Postal",
         validators=[PT_POSTAL_REGEX],
+        verbose_name=_("Postal Code")
     )
-    city = models.CharField(max_length=120, null=True, blank=True, db_column="Localidade")
+    city = models.CharField(max_length=120, null=True, blank=True, db_column="Localidade", verbose_name=_("City"))
 
     phone = models.CharField(
         max_length=30, null=True, blank=True, db_column="Tel_geral",
         validators=[PHONE_REGEX],
+        verbose_name=_("Phone")
     )
-    email = models.EmailField(null=True, blank=True, db_column="Mail_geral")
+    email = models.EmailField(null=True, blank=True, db_column="Mail_geral", verbose_name=_("Email"))
 
-    distributor = models.CharField(max_length=120, null=True, blank=True, db_column="Distribuidor")
-    seller = models.CharField(max_length=120, null=True, blank=True, db_column="Vendedor")
+    distributor = models.CharField(max_length=120, null=True, blank=True, db_column="Distribuidor", verbose_name=_("Distributor"))
+    seller = models.CharField(max_length=120, null=True, blank=True, db_column="Vendedor", verbose_name=_("Seller"))
 
-    updated_at = models.DateTimeField(null=True, blank=True, db_column="Ultimo_Atualizar")
-    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(null=True, blank=True, db_column="Ultimo_Atualizar", verbose_name=_("Updated At"))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
 
     def save(self, *args, **kwargs):
         if not self.code and self.nif:
@@ -79,6 +85,8 @@ class Client(models.Model):
 
     class Meta:
         db_table = "client"
+        verbose_name = _("Client")
+        verbose_name_plural = _("Clients")
         ordering = ["name"]
         indexes = [
             models.Index(fields=["name"]),
@@ -98,27 +106,29 @@ class ClientContact(models.Model):
         on_delete=models.CASCADE,
         related_name="contacts",
         db_index=True,
-        help_text="Owning client."
+        verbose_name=_("Client"),
+        help_text=_("Owning client.")
     )
 
-    name = models.CharField(max_length=200, help_text="Contact person name.")
-    job_title = models.CharField(max_length=120, null=True, blank=True)
-    email = models.EmailField(null=True, blank=True)
+    name = models.CharField(max_length=200, verbose_name=_("Name"), help_text=_("Contact person name."))
+    job_title = models.CharField(max_length=120, null=True, blank=True, verbose_name=_("Job Title"))
+    email = models.EmailField(null=True, blank=True, verbose_name=_("Email"))
     phone = models.CharField(
         max_length=30, null=True, blank=True,
-        validators=[PHONE_REGEX]
+        validators=[PHONE_REGEX],
+        verbose_name=_("Phone")
     )
 
-    is_primary = models.BooleanField(default=False, help_text="Marks this as the primary contact for the client.")
-    notes = models.TextField(null=True, blank=True)
+    is_primary = models.BooleanField(default=False, verbose_name=_("Is Primary"), help_text=_("Marks this as the primary contact for the client."))
+    notes = models.TextField(null=True, blank=True, verbose_name=_("Notes"))
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated At"))
 
     class Meta:
         db_table = "client_contact"
-        verbose_name = "Client Contact"
-        verbose_name_plural = "Client Contacts"
+        verbose_name = _("Client Contact")
+        verbose_name_plural = _("Client Contacts")
         ordering = ["client_id", "name"]
         indexes = [
             models.Index(fields=["client", "name"]),
@@ -148,37 +158,36 @@ class ClientContact(models.Model):
 
 class VP(models.Model):
     id = models.BigAutoField(primary_key=True)
-    vp_code = models.CharField(max_length=255, unique=True, db_column="VP Codice")
+    vp_code = models.CharField(max_length=255, unique=True, db_column="VP Codice", verbose_name=_("VP Code"))
 
-    # Core configuration characteristics
-    variant = models.CharField(max_length=255, null=True, blank=True, db_column="Variante")
-    version = models.CharField(max_length=255, null=True, blank=True, db_column="Versão")
-    homologation = models.CharField(max_length=255, null=True, blank=True, db_column="Homologação")
-    co2 = models.IntegerField(null=True, blank=True, db_column="CO2")
-    tare_kg = models.IntegerField(null=True, blank=True, db_column="TARA")
-    engine_code = models.CharField(max_length=255, null=True, blank=True, db_column="Motore_V")
+    variant = models.CharField(max_length=255, null=True, blank=True, db_column="Variante", verbose_name=_("Variant"))
+    version = models.CharField(max_length=255, null=True, blank=True, db_column="Versão", verbose_name=_("Version"))
+    homologation = models.CharField(max_length=255, null=True, blank=True, db_column="Homologação", verbose_name=_("Homologation"))
+    co2 = models.IntegerField(null=True, blank=True, db_column="CO2", verbose_name=_("CO2"))
+    tare_kg = models.IntegerField(null=True, blank=True, db_column="TARA", verbose_name=_("Tare (kg)"))
+    engine_code = models.CharField(max_length=255, null=True, blank=True, db_column="Motore_V", verbose_name=_("Engine Code"))
 
-    # Commercial codes
-    gama = models.CharField(max_length=255, null=True, blank=True, db_column="GAMA")
-    modelo = models.CharField(max_length=255, null=True, blank=True, db_column="MODELO")
-    cabina = models.CharField(max_length=255, null=True, blank=True, db_column="CABINA")
-    motor = models.CharField(max_length=255, null=True, blank=True, db_column="MOTOR")
-    gearbox = models.CharField(max_length=255, null=True, blank=True, db_column="CAIXA VEL")
-    wheelbase = models.CharField(max_length=255, null=True, blank=True, db_column="WB")
-    dee = models.IntegerField(null=True, blank=True, db_column="DEE")
-    hi = models.CharField(max_length=255, null=True, blank=True, db_column="HI")
+    gama = models.CharField(max_length=255, null=True, blank=True, db_column="GAMA", verbose_name=_("Gama"))
+    modelo = models.CharField(max_length=255, null=True, blank=True, db_column="MODELO", verbose_name=_("Modelo"))
+    cabina = models.CharField(max_length=255, null=True, blank=True, db_column="CABINA", verbose_name=_("Cabina"))
+    motor = models.CharField(max_length=255, null=True, blank=True, db_column="MOTOR", verbose_name=_("Motor"))
+    gearbox = models.CharField(max_length=255, null=True, blank=True, db_column="CAIXA VEL", verbose_name=_("Gearbox"))
+    wheelbase = models.CharField(max_length=255, null=True, blank=True, db_column="WB", verbose_name=_("Wheelbase"))
+    dee = models.IntegerField(null=True, blank=True, db_column="DEE", verbose_name=_("DEE"))
+    hi = models.CharField(max_length=255, null=True, blank=True, db_column="HI", verbose_name=_("HI"))
 
-    # Color
-    color_code_numeric = models.IntegerField(null=True, blank=True, db_column="Colore_Codice (Numerico)")
-    color_desc = models.CharField(max_length=255, null=True, blank=True, db_column="Colore_Descrizione Estesa")
+    color_code_numeric = models.IntegerField(null=True, blank=True, db_column="Colore_Codice (Numerico)", verbose_name=_("Color Code (Numeric)"))
+    color_desc = models.CharField(max_length=255, null=True, blank=True, db_column="Colore_Descrizione Estesa", verbose_name=_("Color Description"))
 
-    notas_vp = models.TextField(null=True, blank=True, db_column="NOTAS_VP")
+    notas_vp = models.TextField(null=True, blank=True, db_column="NOTAS_VP", verbose_name=_("VP Notes"))
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
+    updated_at = models.DateTimeField(default=timezone.now, verbose_name=_("Updated At"))
 
     class Meta:
         db_table = "vp"
+        verbose_name = _("VP")
+        verbose_name_plural = _("VPs")
         ordering = ["vp_code"]
         indexes = [
             models.Index(fields=["vp_code"]),
@@ -189,45 +198,46 @@ class VP(models.Model):
         return self.vp_code
 
 
-# -------------------------
-# Vehicle: physical unit
-# -------------------------
 class Vehicle(models.Model):
-
-    van = models.IntegerField(primary_key=True,unique=True, db_column="VAN")
+    van = models.IntegerField(primary_key=True, unique=True, db_column="VAN", verbose_name=_("VAN"))
 
     vin = models.CharField(
         max_length=17, null=True, blank=True, db_column="VIN",
-        validators=[VIN_REGEX]
+        validators=[VIN_REGEX],
+        verbose_name=_("VIN")
     )
 
     plate = models.CharField(
         max_length=20, null=True, blank=True, db_column="MATRICULA",
-        validators=[PLATE_REGEX]
+        validators=[PLATE_REGEX],
+        verbose_name=_("License Plate")
     )
-    registration_date = models.DateField(null=True, blank=True, db_column="DATA_MATRICULA")
+    registration_date = models.DateField(null=True, blank=True, db_column="DATA_MATRICULA", verbose_name=_("Registration Date"))
 
-    lot = models.IntegerField(null=True, blank=True, db_column="LOT")
-    country = models.CharField(max_length=255, null=True, blank=True, db_column="Country")
-    production_year = models.DateField(null=True, blank=True, db_column="ANO_PROD")
+    lot = models.IntegerField(null=True, blank=True, db_column="LOT", verbose_name=_("Lot"))
+    country = models.CharField(max_length=255, null=True, blank=True, db_column="Country", verbose_name=_("Country"))
+    production_year = models.DateField(null=True, blank=True, db_column="ANO_PROD", verbose_name=_("Production Year"))
 
-    has_service_campaign = models.BooleanField(default=False, null=True, blank=True, db_column="CAMPANHA_SERVICE")
-    service_campaign_date = models.DateField(null=True, blank=True, db_column="CAMPANHA_SERVICE_DATA")
-    service_campaign_due = models.DateField(null=True, blank=True, db_column="CAMPANHA_SERVICE_PREV")
+    has_service_campaign = models.BooleanField(default=False, null=True, blank=True, db_column="CAMPANHA_SERVICE", verbose_name=_("Has Service Campaign"))
+    service_campaign_date = models.DateField(null=True, blank=True, db_column="CAMPANHA_SERVICE_DATA", verbose_name=_("Service Campaign Date"))
+    service_campaign_due = models.DateField(null=True, blank=True, db_column="CAMPANHA_SERVICE_PREV", verbose_name=_("Service Campaign Due"))
 
     vp = models.ForeignKey(
         VP,
         on_delete=models.PROTECT,
         related_name="vehicles",
         db_column="VP_FK",
-        null=False, blank=False
+        null=False, blank=False,
+        verbose_name=_("VP")
     )
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
+    updated_at = models.DateTimeField(default=timezone.now, verbose_name=_("Updated At"))
 
     class Meta:
         db_table = "vehicle"
+        verbose_name = _("Vehicle")
+        verbose_name_plural = _("Vehicles")
         ordering = ["-created_at"]
         indexes = [
             models.Index(fields=["van"]),
@@ -252,22 +262,25 @@ class InternalTransport(models.Model):
         related_name="internal_transports",
         db_column="VAN",
         null=True, blank=True,
-        help_text="Vehicle (by VAN) used for this internal transport."
+        verbose_name=_("Vehicle"),
+        help_text=_("Vehicle (by VAN) used for this internal transport.")
     )
 
-    origin = models.CharField(max_length=255, null=True, blank=True, db_column="ORIGEM")
-    destination = models.CharField(max_length=255, null=True, blank=True, db_column="DESTINO")
+    origin = models.CharField(max_length=255, null=True, blank=True, db_column="ORIGEM", verbose_name=_("Origin"))
+    destination = models.CharField(max_length=255, null=True, blank=True, db_column="DESTINO", verbose_name=_("Destination"))
 
-    request_date = models.DateField(null=True, blank=True, db_column="DATA PEDIDO")
-    transport_date = models.DateField(null=True, blank=True, db_column="DATA TRANSPORTE")
+    request_date = models.DateField(null=True, blank=True, db_column="DATA PEDIDO", verbose_name=_("Request Date"))
+    transport_date = models.DateField(null=True, blank=True, db_column="DATA TRANSPORTE", verbose_name=_("Transport Date"))
 
-    notes = models.TextField(null=True, blank=True, db_column="NOTAS")
+    notes = models.TextField(null=True, blank=True, db_column="NOTAS", verbose_name=_("Notes"))
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated At"))
 
     class Meta:
         db_table = "internal_transport"
+        verbose_name = _("Internal Transport")
+        verbose_name_plural = _("Internal Transports")
         ordering = ["-request_date"]
         indexes = [
             models.Index(fields=["vehicle", "transport_date"]),
@@ -286,69 +299,66 @@ class OCFStock(models.Model):
         on_delete=models.CASCADE,
         related_name="ocf_entry",
         db_column="VAN",
-        help_text="The vehicle tracked in OCF stock."
+        verbose_name=_("Vehicle"),
+        help_text=_("The vehicle tracked in OCF stock.")
     )
 
-    # --- Sales assignment ---
-    has_client = models.BooleanField(default=False, db_column="OCF", help_text="True if vehicle assigned to a client")
-    client_assigned_date = models.DateField(null=True, blank=True, db_column="OCF_DATA")
-    channel = models.CharField(max_length=255, null=True, blank=True, db_column="CANAL")  # direct / dealer / stock
-    distributor = models.CharField(max_length=255, null=True, blank=True, db_column="DISTRIBUIDOR")
+    has_client = models.BooleanField(default=False, db_column="OCF", verbose_name=_("Has Client"), help_text=_("True if vehicle assigned to a client"))
+    client_assigned_date = models.DateField(null=True, blank=True, db_column="OCF_DATA", verbose_name=_("Client Assigned Date"))
+    channel = models.CharField(max_length=255, null=True, blank=True, db_column="CANAL", verbose_name=_("Channel"))
+    distributor = models.CharField(max_length=255, null=True, blank=True, db_column="DISTRIBUIDOR", verbose_name=_("Distributor"))
     salesperson = models.ForeignKey(
         "Salesperson",
         on_delete=models.SET_NULL,
         null=True, blank=True,
         related_name="ocf_sales",
-        db_column="VENDEDOR"
+        db_column="VENDEDOR",
+        verbose_name=_("Salesperson")
     )
 
-    # --- Order details ---
-    order_week = models.IntegerField(null=True, blank=True, db_column="SEMANA", help_text="Week number of order")
-    order_date = models.DateField(null=True, blank=True, db_column="DATA")
-    order_number = models.IntegerField(null=True, blank=True, db_column="NUMERO LATERAL")
-    client_name = models.CharField(max_length=255, null=True, blank=True, db_column="CLIENTE")
-    client_final = models.CharField(max_length=255, null=True, blank=True, db_column="CLIENTE3")
+    order_week = models.IntegerField(null=True, blank=True, db_column="SEMANA", verbose_name=_("Order Week"), help_text=_("Week number of order"))
+    order_date = models.DateField(null=True, blank=True, db_column="DATA", verbose_name=_("Order Date"))
+    order_number = models.IntegerField(null=True, blank=True, db_column="NUMERO LATERAL", verbose_name=_("Order Number"))
+    client_name = models.CharField(max_length=255, null=True, blank=True, db_column="CLIENTE", verbose_name=_("Client Name"))
+    client_final = models.CharField(max_length=255, null=True, blank=True, db_column="CLIENTE3", verbose_name=_("Final Client"))
 
-    # --- Workflow flags ---
-    sold = models.BooleanField(default=False, db_column="VENDIDO")
-    produced = models.BooleanField(default=False, db_column="PRODUZIDO")
-    buyback = models.BooleanField(default=False, db_column="BB")
-    extended_warranty = models.BooleanField(default=False, db_column="EW")
-    extended_warranty_date = models.DateField(null=True, blank=True, db_column="EW_DATA")
-    maintenance_contract = models.BooleanField(default=False, db_column="CMR")
-    maintenance_contract_date = models.DateField(null=True, blank=True, db_column="CMR_DATA")
+    sold = models.BooleanField(default=False, db_column="VENDIDO", verbose_name=_("Sold"))
+    produced = models.BooleanField(default=False, db_column="PRODUZIDO", verbose_name=_("Produced"))
+    buyback = models.BooleanField(default=False, db_column="BB", verbose_name=_("Buyback"))
+    extended_warranty = models.BooleanField(default=False, db_column="EW", verbose_name=_("Extended Warranty"))
+    extended_warranty_date = models.DateField(null=True, blank=True, db_column="EW_DATA", verbose_name=_("Extended Warranty Date"))
+    maintenance_contract = models.BooleanField(default=False, db_column="CMR", verbose_name=_("Maintenance Contract"))
+    maintenance_contract_date = models.DateField(null=True, blank=True, db_column="CMR_DATA", verbose_name=_("Maintenance Contract Date"))
 
-    # --- Logistics ---
-    delivery_date = models.DateField(null=True, blank=True, db_column="DATA ENTREGA")
-    expected_delivery = models.CharField(max_length=255, null=True, blank=True, db_column="ENTREGA_PREVISTA")
-    reservation_info = models.CharField(max_length=255, null=True, blank=True, db_column="RESERVA")
-    reservation_notes = models.TextField(null=True, blank=True, db_column="RESERVA_NOTAS")
-    reservation_date = models.DateField(null=True, blank=True, db_column="DATA RESERVA")
-    location = models.CharField(max_length=255, null=True, blank=True, db_column="LOCALIZAÇÃO")
-    location_date = models.DateField(null=True, blank=True, db_column="LOCAL_DATA")
+    delivery_date = models.DateField(null=True, blank=True, db_column="DATA ENTREGA", verbose_name=_("Delivery Date"))
+    expected_delivery = models.CharField(max_length=255, null=True, blank=True, db_column="ENTREGA_PREVISTA", verbose_name=_("Expected Delivery"))
+    reservation_info = models.CharField(max_length=255, null=True, blank=True, db_column="RESERVA", verbose_name=_("Reservation Info"))
+    reservation_notes = models.TextField(null=True, blank=True, db_column="RESERVA_NOTAS", verbose_name=_("Reservation Notes"))
+    reservation_date = models.DateField(null=True, blank=True, db_column="DATA RESERVA", verbose_name=_("Reservation Date"))
+    location = models.CharField(max_length=255, null=True, blank=True, db_column="LOCALIZAÇÃO", verbose_name=_("Location"))
+    location_date = models.DateField(null=True, blank=True, db_column="LOCAL_DATA", verbose_name=_("Location Date"))
 
-    # --- PDI / warranty workflow ---
-    warranty_start = models.DateField(null=True, blank=True, db_column="WSD")
-    pre_pdi_date = models.DateField(null=True, blank=True, db_column="DATA_PRE_PDI")
-    pdi_request_date = models.DateField(null=True, blank=True, db_column="DATA_PDI_PEDIDO")
-    pdi_completed_date = models.DateField(null=True, blank=True, db_column="DATA_PDI_OK")
-    pdi_notes = models.TextField(null=True, blank=True, db_column="NOTAS_PDI")
-    pdi_workshop = models.CharField(max_length=255, null=True, blank=True, db_column="OFICINA_PDI")
+    warranty_start = models.DateField(null=True, blank=True, db_column="WSD", verbose_name=_("Warranty Start"))
+    pre_pdi_date = models.DateField(null=True, blank=True, db_column="DATA_PRE_PDI", verbose_name=_("Pre-PDI Date"))
+    pdi_request_date = models.DateField(null=True, blank=True, db_column="DATA_PDI_PEDIDO", verbose_name=_("PDI Request Date"))
+    pdi_completed_date = models.DateField(null=True, blank=True, db_column="DATA_PDI_OK", verbose_name=_("PDI Completed Date"))
+    pdi_notes = models.TextField(null=True, blank=True, db_column="NOTAS_PDI", verbose_name=_("PDI Notes"))
+    pdi_workshop = models.CharField(max_length=255, null=True, blank=True, db_column="OFICINA_PDI", verbose_name=_("PDI Workshop"))
 
-    # --- Campaigns ---
-    has_service_campaign = models.BooleanField(default=False, db_column="CAMPANHA_SERVICE")
-    service_campaign_date = models.DateField(null=True, blank=True, db_column="CAMPANHA_SERVICE_DATA")
-    service_campaign_due = models.DateField(null=True, blank=True, db_column="CAMPANHA_SERVICE_PREV")
+    has_service_campaign = models.BooleanField(default=False, db_column="CAMPANHA_SERVICE", verbose_name=_("Has Service Campaign"))
+    service_campaign_date = models.DateField(null=True, blank=True, db_column="CAMPANHA_SERVICE_DATA", verbose_name=_("Service Campaign Date"))
+    service_campaign_due = models.DateField(null=True, blank=True, db_column="CAMPANHA_SERVICE_PREV", verbose_name=_("Service Campaign Due"))
 
-    # --- Misc ---
-    notes = models.TextField(null=True, blank=True, db_column="NOTAS")
-    stock_notes = models.TextField(null=True, blank=True, db_column="Notas_STOCK")
+    notes = models.TextField(null=True, blank=True, db_column="NOTAS", verbose_name=_("Notes"))
+    stock_notes = models.TextField(null=True, blank=True, db_column="Notas_STOCK", verbose_name=_("Stock Notes"))
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated At"))
 
     class Meta:
         db_table = "ocf_stock"
+        verbose_name = _("OCF Stock")
+        verbose_name_plural = _("OCF Stocks")
         ordering = ["-created_at"]
         indexes = [
             models.Index(fields=["has_client"]),

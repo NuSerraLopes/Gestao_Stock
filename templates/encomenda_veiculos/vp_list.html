@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
-  <h2>VPs</h2>
-  <a href="{% url 'Encomenda_Veiculos:vp_create' %}">Create New VP</a>
+  <h2>{% trans "VPs" %}</h2>
+  <a href="{% url 'Encomenda_Veiculos:vp_create' %}">{% trans "Create New VP" %}</a>
   <ul>
     {% for vp in object_list %}
       <li>

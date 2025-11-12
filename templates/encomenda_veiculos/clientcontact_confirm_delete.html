@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
-    <h2>Are you sure you want to delete {{ object.name }}?</h2>
+    <h2>{% blocktranslate %}Are you sure you want to delete {{ object.name }}?{% endblocktranslate %}</h2>
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Confirm</button>
-        <a href="{% url 'Encomenda_Veiculos:clientcontact_detail' object.pk %}">Cancel</a>
+        <button type="submit">{% translate "Confirm" %}</button>
+        <a href="{% url 'Encomenda_Veiculos:clientcontact_detail' object.pk %}">{% translate "Cancel" %}</a>
     </form>
 {% endblock %}

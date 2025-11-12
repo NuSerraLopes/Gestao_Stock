@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
   <h2>{{ object.name }}</h2>
-  <p>Code: {{ object.code }}</p>
-  <p>NIF: {{ object.nif }}</p>
-  <p>Address: {{ object.address }}</p>
-  <p>Postal Code: {{ object.postal_code }}</p>
-  <p>City: {{ object.city }}</p>
-  <p>Phone: {{ object.phone }}</p>
-  <p>Email: {{ object.email }}</p>
-  <p>Distributor: {{ object.distributor }}</p>
-  <p>Seller: {{ object.seller }}</p>
+  <p>{% translate "Code" %}: {{ object.code }}</p>
+  <p>{% translate "NIF" %}: {{ object.nif }}</p>
+  <p>{% translate "Address" %}: {{ object.address }}</p>
+  <p>{% translate "Postal Code" %}: {{ object.postal_code }}</p>
+  <p>{% translate "City" %}: {{ object.city }}</p>
+  <p>{% translate "Phone" %}: {{ object.phone }}</p>
+  <p>{% translate "Email" %}: {{ object.email }}</p>
+  <p>{% translate "Distributor" %}: {{ object.distributor }}</p>
+  <p>{% translate "Seller" %}: {{ object.seller }}</p>
 
-  <a href="{% url 'Encomenda_Veiculos:client_update' object.pk %}">Edit</a>
-  <a href="{% url 'Encomenda_Veiculos:client_delete' object.pk %}">Delete</a>
+  <a href="{% url 'Encomenda_Veiculos:client_update' object.pk %}">{% translate "Edit" %}</a>
+  <a href="{% url 'Encomenda_Veiculos:client_delete' object.pk %}">{% translate "Delete" %}</a>
 {% endblock %}

@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
-  <h2>Distributors</h2>
-  <a href="{% url 'Encomenda_Veiculos:distributor_create' %}">Create New Distributor</a>
+  <h2>{% translate "Distributors" %}</h2>
+  <a href="{% url 'Encomenda_Veiculos:distributor_create' %}">{% translate "Create New Distributor" %}</a>
   <ul>
     {% for distributor in object_list %}
       <li>

@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
     <h2>{{ object.name }}</h2>
-    <p>Email: {{ object.email }}</p>
-    <p>Phone: {{ object.phone }}</p>
-    <a href="{% url 'Encomenda_Veiculos:clientcontact_update' object.pk %}">Edit</a>
-    <a href="{% url 'Encomenda_Veiculos:clientcontact_delete' object.pk %}">Delete</a>
+    <p>{% translate "Email" %}: {{ object.email }}</p>
+    <p>{% translate "Phone" %}: {{ object.phone }}</p>
+    <a href="{% url 'Encomenda_Veiculos:clientcontact_update' object.pk %}">{% translate "Edit" %}</a>
+    <a href="{% url 'Encomenda_Veiculos:clientcontact_delete' object.pk %}">{% translate "Delete" %}</a>
 {% endblock %}
