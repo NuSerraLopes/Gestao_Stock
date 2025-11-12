@@ -243,7 +243,6 @@ class Vehicle(models.Model):
             models.Index(fields=["vp"]),
         ]
         constraints = [
-            models.UniqueConstraint(fields=["vin"], name="uniq_vehicle_vin_nn", condition=models.Q(vin__isnull=False)),
             models.UniqueConstraint(fields=["plate"], name="uniq_vehicle_plate_nn", condition=models.Q(plate__isnull=False)),
         ]
 
