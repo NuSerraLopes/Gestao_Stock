@@ -35,3 +35,6 @@ class OCFStockForm(forms.ModelForm):
     class Meta:
         model = OCFStock
         fields = '__all__'
+
+class ImportFileForm(forms.Form):
+    file = forms.FileField()

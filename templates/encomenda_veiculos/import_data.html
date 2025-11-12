@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "Import Data" %}{% endblock %}
+
+{% block content %}
+    <h2>{% translate "Import Data" %}</h2>
+    <p>{% translate "Upload an Excel file to import data into the application." %}</p>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">{% translate "Import" %}</button>
+    </form>
+{% endblock %}

@@ -15,8 +15,8 @@ VIN_REGEX = RegexValidator(
 )
 PLATE_REGEX = RegexValidator(
     regex=r"^[A-Z0-9\- ]{5,15}$",
-    message=_("License plate should be 5–15 chars (letters/digits/hyphens/spaces)."
-))
+    message=_("License plate should be 5–15 chars (letters/digits/hyphens/spaces).")
+)
 
 class Salesperson(models.Model):
     user = models.OneToOneField(
@@ -48,11 +48,11 @@ class Salesperson(models.Model):
 
 class Client(models.Model):
     id = models.BigAutoField(primary_key=True)
-    code = models.CharField(max_length=6, unique=True, editable=False, db_column="Cliente_Codice", verbose_name=_("Code"))
+    code = models.CharField(max_length=20, db_column="Cliente_Codice", verbose_name=_("Code"))
     name = models.CharField(max_length=200, db_column="Cliente_Nome", verbose_name=_("Name"))
 
     nif = models.CharField(
-        max_length=9, null=False, blank=False, unique=True, db_column="NIF",
+        max_length=9, null=True, blank=True, db_column="NIF",
         validators=[PT_NIF_REGEX],
         verbose_name=_("NIF"),
         help_text=_("Portuguese taxpayer number (9 digits).")
@@ -75,13 +75,10 @@ class Client(models.Model):
     distributor = models.CharField(max_length=120, null=True, blank=True, db_column="Distribuidor", verbose_name=_("Distributor"))
     seller = models.CharField(max_length=120, null=True, blank=True, db_column="Vendedor", verbose_name=_("Seller"))
 
+    pending_review = models.BooleanField(default=False, db_column="PENDING_REVIEW", verbose_name=_("Pending Review"))
+
     updated_at = models.DateTimeField(null=True, blank=True, db_column="Ultimo_Atualizar", verbose_name=_("Updated At"))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
-
-    def save(self, *args, **kwargs):
-        if not self.code and self.nif:
-            self.code = self.nif[-6:]
-        super().save(*args, **kwargs)
 
     class Meta:
         db_table = "client"

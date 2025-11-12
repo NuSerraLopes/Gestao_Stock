@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import OCFStock, Client, Vehicle, VP, Salesperson, ClientContact, InternalTransport
-from .forms import OCFStockForm, ClientForm, VehicleForm, VPForm, SalespersonForm, ClientContactForm, InternalTransportForm
+from .forms import OCFStockForm, ClientForm, VehicleForm, VPForm, SalespersonForm, ClientContactForm, InternalTransportForm, ImportFileForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
@@ -11,6 +11,18 @@ from django.utils.decorators import method_decorator
 @login_required
 def home(request):
     return render(request, 'encomenda_veiculos/home.html')
+
+@login_required
+def import_data(request):
+    if request.method == 'POST':
+        form = ImportFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Handle file upload and data processing here
+            # ...
+            return redirect(reverse_lazy('Encomenda_Veiculos:home'))
+    else:
+        form = ImportFileForm()
+    return render(request, 'encomenda_veiculos/import_data.html', {'form': form})
 
 class CustomLoginView(LoginView):
     template_name = 'encomenda_veiculos/login.html'
