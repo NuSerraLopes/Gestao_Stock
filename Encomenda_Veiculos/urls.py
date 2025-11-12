@@ -19,13 +19,6 @@ urlpatterns = [
     path('vps/<int:pk>/update/', views.VPUpdateView.as_view(), name='vp_update'),
     path('vps/<int:pk>/delete/', views.VPDeleteView.as_view(), name='vp_delete'),
 
-    # Vehicle URLs
-    path('vehicles/', views.VehicleListView.as_view(), name='vehicle_list'),
-    path('vehicles/<int:pk>/', views.VehicleDetailView.as_view(), name='vehicle_detail'),
-    path('vehicles/create/', views.VehicleCreateView.as_view(), name='vehicle_create'),
-    path('vehicles/<int:pk>/update/', views.VehicleUpdateView.as_view(), name='vehicle_update'),
-    path('vehicles/<int:pk>/delete/', views.VehicleDeleteView.as_view(), name='vehicle_delete'),
-
     # OCFStock URLs
     path('ocfstocks/', views.OCFStockListView.as_view(), name='ocfstock_list'),
     path('ocfstocks/<int:pk>/', views.OCFStockDetailView.as_view(), name='ocfstock_detail'),

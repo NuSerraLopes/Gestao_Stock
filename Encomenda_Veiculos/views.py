@@ -58,32 +58,6 @@ class VPDeleteView(DeleteView):
     template_name = 'encomenda_veiculos/vp_confirm_delete.html'
     success_url = reverse_lazy('Encomenda_Veiculos:vp_list')
 
-# Vehicle Views
-class VehicleListView(ListView):
-    model = Vehicle
-    template_name = 'encomenda_veiculos/vehicle_list.html'
-
-class VehicleDetailView(DetailView):
-    model = Vehicle
-    template_name = 'encomenda_veiculos/vehicle_detail.html'
-
-class VehicleCreateView(CreateView):
-    model = Vehicle
-    fields = '__all__'
-    template_name = 'encomenda_veiculos/vehicle_form.html'
-    success_url = reverse_lazy('Encomenda_Veiculos:vehicle_list')
-
-class VehicleUpdateView(UpdateView):
-    model = Vehicle
-    fields = '__all__'
-    template_name = 'encomenda_veiculos/vehicle_form.html'
-    success_url = reverse_lazy('Encomenda_Veiculos:vehicle_list')
-
-class VehicleDeleteView(DeleteView):
-    model = Vehicle
-    template_name = 'encomenda_veiculos/vehicle_confirm_delete.html'
-    success_url = reverse_lazy('Encomenda_Veiculos:vehicle_list')
-
 # OCFStock Views
 class OCFStockListView(ListView):
     model = OCFStock
