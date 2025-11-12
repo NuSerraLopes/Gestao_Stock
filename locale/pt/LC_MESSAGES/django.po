@@ -12,489 +12,490 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: .\Encomenda_Veiculos\models.py:8
 msgid "NIF must be 9 digits."
-msgstr ""
+msgstr "O NIF deve ter 9 dígitos."
 
 #: .\Encomenda_Veiculos\models.py:9
 msgid "Postal code must be NNNN-NNN."
-msgstr ""
+msgstr "O código postal deve ser NNNN-NNN."
 
 #: .\Encomenda_Veiculos\models.py:10
 msgid "Invalid phone number format."
-msgstr ""
+msgstr "Formato de número de telefone inválido."
 
 #: .\Encomenda_Veiculos\models.py:14
 msgid "VIN must be 11–17 characters (alphanumeric, excluding I/O/Q)."
-msgstr ""
+msgstr "O VIN deve ter entre 11 e 17 caracteres (alfanuméricos, excluindo I/O/Q)."
 
 #: .\Encomenda_Veiculos\models.py:18
 msgid "License plate should be 5–15 chars (letters/digits/hyphens/spaces)."
-msgstr ""
+msgstr "A matrícula deve ter entre 5 e 15 caracteres (letras/dígitos/hífens/espaços)."
 
 #: .\Encomenda_Veiculos\models.py:26
 msgid "User"
-msgstr ""
+msgstr "Utilizador"
 
 #: .\Encomenda_Veiculos\models.py:27
 msgid "User account for this salesperson."
-msgstr ""
+msgstr "Conta de utilizador para este vendedor."
 
 #: .\Encomenda_Veiculos\models.py:30 .\Encomenda_Veiculos\models.py:75
 #: .\Encomenda_Veiculos\models.py:309
 #: .\templates\encomenda_veiculos\client_detail.html:13
 msgid "Distributor"
-msgstr ""
+msgstr "Distribuidor"
 
 #: .\Encomenda_Veiculos\models.py:31
 msgid "Active"
-msgstr ""
+msgstr "Ativo"
 
 #: .\Encomenda_Veiculos\models.py:33 .\Encomenda_Veiculos\models.py:79
 #: .\Encomenda_Veiculos\models.py:125 .\Encomenda_Veiculos\models.py:184
 #: .\Encomenda_Veiculos\models.py:234 .\Encomenda_Veiculos\models.py:277
 #: .\Encomenda_Veiculos\models.py:355
 msgid "Created At"
-msgstr ""
+msgstr "Criado em"
 
 #: .\Encomenda_Veiculos\models.py:34 .\Encomenda_Veiculos\models.py:78
 #: .\Encomenda_Veiculos\models.py:126 .\Encomenda_Veiculos\models.py:185
 #: .\Encomenda_Veiculos\models.py:235 .\Encomenda_Veiculos\models.py:278
 #: .\Encomenda_Veiculos\models.py:356
 msgid "Updated At"
-msgstr ""
+msgstr "Atualizado em"
 
 #: .\Encomenda_Veiculos\models.py:38 .\Encomenda_Veiculos\models.py:316
 msgid "Salesperson"
-msgstr ""
+msgstr "Vendedor"
 
 #: .\Encomenda_Veiculos\models.py:39
 msgid "Salespeople"
-msgstr ""
+msgstr "Vendedores"
 
 #: .\Encomenda_Veiculos\models.py:51
 #: .\templates\encomenda_veiculos\client_detail.html:6
 #: .\templates\encomenda_veiculos\distributor_detail.html:6
 #: .\templates\encomenda_veiculos\vp_detail.html:6
 msgid "Code"
-msgstr ""
+msgstr "Código"
 
 #: .\Encomenda_Veiculos\models.py:52 .\Encomenda_Veiculos\models.py:113
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: .\Encomenda_Veiculos\models.py:57
 #: .\templates\encomenda_veiculos\client_detail.html:7
 msgid "NIF"
-msgstr ""
+msgstr "NIF"
 
 #: .\Encomenda_Veiculos\models.py:58
 msgid "Portuguese taxpayer number (9 digits)."
-msgstr ""
+msgstr "Número de contribuinte português (9 dígitos)."
 
 #: .\Encomenda_Veiculos\models.py:60
 #: .\templates\encomenda_veiculos\client_detail.html:8
 msgid "Address"
-msgstr ""
+msgstr "Morada"
 
 #: .\Encomenda_Veiculos\models.py:64
 #: .\templates\encomenda_veiculos\client_detail.html:9
 msgid "Postal Code"
-msgstr ""
+msgstr "Código Postal"
 
 #: .\Encomenda_Veiculos\models.py:66
 #: .\templates\encomenda_veiculos\client_detail.html:10
 msgid "City"
-msgstr ""
+msgstr "Cidade"
 
 #: .\Encomenda_Veiculos\models.py:71 .\Encomenda_Veiculos\models.py:119
 #: .\templates\encomenda_veiculos\client_detail.html:11
 #: .\templates\encomenda_veiculos\clientcontact_detail.html:7
 msgid "Phone"
-msgstr ""
+msgstr "Telefone"
 
 #: .\Encomenda_Veiculos\models.py:73 .\Encomenda_Veiculos\models.py:115
 #: .\templates\encomenda_veiculos\client_detail.html:12
 #: .\templates\encomenda_veiculos\clientcontact_detail.html:6
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: .\Encomenda_Veiculos\models.py:76
 #: .\templates\encomenda_veiculos\client_detail.html:14
 msgid "Seller"
-msgstr ""
+msgstr "Vendedor"
 
 #: .\Encomenda_Veiculos\models.py:88 .\Encomenda_Veiculos\models.py:109
 msgid "Client"
-msgstr ""
+msgstr "Cliente"
 
 #: .\Encomenda_Veiculos\models.py:89
 #: .\templates\encomenda_veiculos\client_list.html:5
 msgid "Clients"
-msgstr ""
+msgstr "Clientes"
 
 #: .\Encomenda_Veiculos\models.py:110
 msgid "Owning client."
-msgstr ""
+msgstr "Cliente proprietário."
 
 #: .\Encomenda_Veiculos\models.py:113
 msgid "Contact person name."
-msgstr ""
+msgstr "Nome da pessoa de contacto."
 
 #: .\Encomenda_Veiculos\models.py:114
 msgid "Job Title"
-msgstr ""
+msgstr "Cargo"
 
 #: .\Encomenda_Veiculos\models.py:122
 msgid "Is Primary"
-msgstr ""
+msgstr "É Principal"
 
 #: .\Encomenda_Veiculos\models.py:122
 msgid "Marks this as the primary contact for the client."
-msgstr ""
+msgstr "Marca este como o contacto principal para o cliente."
 
 #: .\Encomenda_Veiculos\models.py:123 .\Encomenda_Veiculos\models.py:275
 #: .\Encomenda_Veiculos\models.py:352
 msgid "Notes"
-msgstr ""
+msgstr "Notas"
 
 #: .\Encomenda_Veiculos\models.py:130
 #: .\templates\encomenda_veiculos\clientcontact_form.html:6
 msgid "Client Contact"
-msgstr ""
+msgstr "Contacto do Cliente"
 
 #: .\Encomenda_Veiculos\models.py:131 .\templates\base.html:25
 #: .\templates\encomenda_veiculos\clientcontact_list.html:5
 msgid "Client Contacts"
-msgstr ""
+msgstr "Contactos dos Clientes"
 
 #: .\Encomenda_Veiculos\models.py:161
 msgid "VP Code"
-msgstr ""
+msgstr "Código VP"
 
 #: .\Encomenda_Veiculos\models.py:163
 msgid "Variant"
-msgstr ""
+msgstr "Variante"
 
 #: .\Encomenda_Veiculos\models.py:164
 msgid "Version"
-msgstr ""
+msgstr "Versão"
 
 #: .\Encomenda_Veiculos\models.py:165
 msgid "Homologation"
-msgstr ""
+msgstr "Homologação"
 
 #: .\Encomenda_Veiculos\models.py:166
 msgid "CO2"
-msgstr ""
+msgstr "CO2"
 
 #: .\Encomenda_Veiculos\models.py:167
 msgid "Tare (kg)"
-msgstr ""
+msgstr "Tara (kg)"
 
 #: .\Encomenda_Veiculos\models.py:168
 msgid "Engine Code"
-msgstr ""
+msgstr "Código do Motor"
 
 #: .\Encomenda_Veiculos\models.py:170
 msgid "Gama"
-msgstr ""
+msgstr "Gama"
 
 #: .\Encomenda_Veiculos\models.py:171
 msgid "Modelo"
-msgstr ""
+msgstr "Modelo"
 
 #: .\Encomenda_Veiculos\models.py:172
 msgid "Cabina"
-msgstr ""
+msgstr "Cabina"
 
 #: .\Encomenda_Veiculos\models.py:173
 msgid "Motor"
-msgstr ""
+msgstr "Motor"
 
 #: .\Encomenda_Veiculos\models.py:174
 msgid "Gearbox"
-msgstr ""
+msgstr "Caixa de Velocidades"
 
 #: .\Encomenda_Veiculos\models.py:175
 msgid "Wheelbase"
-msgstr ""
+msgstr "Distância entre Eixos"
 
 #: .\Encomenda_Veiculos\models.py:176
 msgid "DEE"
-msgstr ""
+msgstr "DEE"
 
 #: .\Encomenda_Veiculos\models.py:177
 msgid "HI"
-msgstr ""
+msgstr "HI"
 
 #: .\Encomenda_Veiculos\models.py:179
 msgid "Color Code (Numeric)"
-msgstr ""
+msgstr "Código da Cor (Numérico)"
 
 #: .\Encomenda_Veiculos\models.py:180
 msgid "Color Description"
-msgstr ""
+msgstr "Descrição da Cor"
 
 #: .\Encomenda_Veiculos\models.py:182
 msgid "VP Notes"
-msgstr ""
+msgstr "Notas VP"
 
 #: .\Encomenda_Veiculos\models.py:189 .\Encomenda_Veiculos\models.py:231
 msgid "VP"
-msgstr ""
+msgstr "VP"
 
 #: .\Encomenda_Veiculos\models.py:190 .\templates\base.html:28
 #: .\templates\encomenda_veiculos\vp_list.html:5
 msgid "VPs"
-msgstr ""
+msgstr "VPs"
 
 #: .\Encomenda_Veiculos\models.py:202
 msgid "VAN"
-msgstr ""
+msgstr "VAN"
 
 #: .\Encomenda_Veiculos\models.py:207
 msgid "VIN"
-msgstr ""
+msgstr "VIN"
 
 #: .\Encomenda_Veiculos\models.py:213
 msgid "License Plate"
-msgstr ""
+msgstr "Matrícula"
 
 #: .\Encomenda_Veiculos\models.py:215
 msgid "Registration Date"
-msgstr ""
+msgstr "Data de Matrícula"
 
 #: .\Encomenda_Veiculos\models.py:217
 msgid "Lot"
-msgstr ""
+msgstr "Lote"
 
 #: .\Encomenda_Veiculos\models.py:218
 msgid "Country"
-msgstr ""
+msgstr "País"
 
 #: .\Encomenda_Veiculos\models.py:219
 msgid "Production Year"
-msgstr ""
+msgstr "Ano de Produção"
 
 #: .\Encomenda_Veiculos\models.py:221 .\Encomenda_Veiculos\models.py:348
 msgid "Has Service Campaign"
-msgstr ""
+msgstr "Tem Campanha de Serviço"
 
 #: .\Encomenda_Veiculos\models.py:222 .\Encomenda_Veiculos\models.py:349
 msgid "Service Campaign Date"
-msgstr ""
+msgstr "Data da Campanha de Serviço"
 
 #: .\Encomenda_Veiculos\models.py:223 .\Encomenda_Veiculos\models.py:350
 msgid "Service Campaign Due"
-msgstr ""
+msgstr "Campanha de Serviço Pendente"
 
 #: .\Encomenda_Veiculos\models.py:239 .\Encomenda_Veiculos\models.py:265
 #: .\Encomenda_Veiculos\models.py:302
 msgid "Vehicle"
-msgstr ""
+msgstr "Viatura"
 
 #: .\Encomenda_Veiculos\models.py:240
 msgid "Vehicles"
-msgstr ""
+msgstr "Viaturas"
 
 #: .\Encomenda_Veiculos\models.py:266
 msgid "Vehicle (by VAN) used for this internal transport."
-msgstr ""
+msgstr "Viatura (por VAN) utilizada para este transporte interno."
 
 #: .\Encomenda_Veiculos\models.py:269
 #: .\templates\encomenda_veiculos\internaltransport_detail.html:6
 msgid "Origin"
-msgstr ""
+msgstr "Origem"
 
 #: .\Encomenda_Veiculos\models.py:270
 #: .\templates\encomenda_veiculos\internaltransport_detail.html:7
 msgid "Destination"
-msgstr ""
+msgstr "Destino"
 
 #: .\Encomenda_Veiculos\models.py:272
 msgid "Request Date"
-msgstr ""
+msgstr "Data do Pedido"
 
 #: .\Encomenda_Veiculos\models.py:273
 msgid "Transport Date"
-msgstr ""
+msgstr "Data do Transporte"
 
 #: .\Encomenda_Veiculos\models.py:282
 #: .\templates\encomenda_veiculos\internaltransport_form.html:6
 msgid "Internal Transport"
-msgstr ""
+msgstr "Transporte Interno"
 
 #: .\Encomenda_Veiculos\models.py:283 .\templates\base.html:26
 #: .\templates\encomenda_veiculos\internaltransport_list.html:5
 msgid "Internal Transports"
-msgstr ""
+msgstr "Transportes Internos"
 
 #: .\Encomenda_Veiculos\models.py:303
 msgid "The vehicle tracked in OCF stock."
-msgstr ""
+msgstr "A viatura seguida no stock OCF."
 
 #: .\Encomenda_Veiculos\models.py:306
 msgid "Has Client"
-msgstr ""
+msgstr "Tem Cliente"
 
 #: .\Encomenda_Veiculos\models.py:306
 msgid "True if vehicle assigned to a client"
-msgstr ""
+msgstr "Verdadeiro se a viatura estiver atribuída a um cliente"
 
 #: .\Encomenda_Veiculos\models.py:307
 msgid "Client Assigned Date"
-msgstr ""
+msgstr "Data de Atribuição ao Cliente"
 
 #: .\Encomenda_Veiculos\models.py:308
 msgid "Channel"
-msgstr ""
+msgstr "Canal"
 
 #: .\Encomenda_Veiculos\models.py:319
 msgid "Order Week"
-msgstr ""
+msgstr "Semana da Encomenda"
 
 #: .\Encomenda_Veiculos\models.py:319
 msgid "Week number of order"
-msgstr ""
+msgstr "Número da semana da encomenda"
 
 #: .\Encomenda_Veiculos\models.py:320
 msgid "Order Date"
-msgstr ""
+msgstr "Data da Encomenda"
 
 #: .\Encomenda_Veiculos\models.py:321
 msgid "Order Number"
-msgstr ""
+msgstr "Número da Encomenda"
 
 #: .\Encomenda_Veiculos\models.py:322
 msgid "Client Name"
-msgstr ""
+msgstr "Nome do Cliente"
 
 #: .\Encomenda_Veiculos\models.py:323
 msgid "Final Client"
-msgstr ""
+msgstr "Cliente Final"
 
 #: .\Encomenda_Veiculos\models.py:325
 msgid "Sold"
-msgstr ""
+msgstr "Vendido"
 
 #: .\Encomenda_Veiculos\models.py:326
 msgid "Produced"
-msgstr ""
+msgstr "Produzido"
 
 #: .\Encomenda_Veiculos\models.py:327
 msgid "Buyback"
-msgstr ""
+msgstr "Recompra"
 
 #: .\Encomenda_Veiculos\models.py:328
 msgid "Extended Warranty"
-msgstr ""
+msgstr "Garantia Extendida"
 
 #: .\Encomenda_Veiculos\models.py:329
 msgid "Extended Warranty Date"
-msgstr ""
+msgstr "Data da Garantia Extendida"
 
 #: .\Encomenda_Veiculos\models.py:330
 msgid "Maintenance Contract"
-msgstr ""
+msgstr "Contrato de Manutenção"
 
 #: .\Encomenda_Veiculos\models.py:331
 msgid "Maintenance Contract Date"
-msgstr ""
+msgstr "Data do Contrato de Manutenção"
 
 #: .\Encomenda_Veiculos\models.py:333
 msgid "Delivery Date"
-msgstr ""
+msgstr "Data de Entrega"
 
 #: .\Encomenda_Veiculos\models.py:334
 msgid "Expected Delivery"
-msgstr ""
+msgstr "Entrega Prevista"
 
 #: .\Encomenda_Veiculos\models.py:335
 msgid "Reservation Info"
-msgstr ""
+msgstr "Informação da Reserva"
 
 #: .\Encomenda_Veiculos\models.py:336
 msgid "Reservation Notes"
-msgstr ""
+msgstr "Notas da Reserva"
 
 #: .\Encomenda_Veiculos\models.py:337
 msgid "Reservation Date"
-msgstr ""
+msgstr "Data da Reserva"
 
 #: .\Encomenda_Veiculos\models.py:338
 msgid "Location"
-msgstr ""
+msgstr "Localização"
 
 #: .\Encomenda_Veiculos\models.py:339
 msgid "Location Date"
-msgstr ""
+msgstr "Data da Localização"
 
 #: .\Encomenda_Veiculos\models.py:341
 msgid "Warranty Start"
-msgstr ""
+msgstr "Início da Garantia"
 
 #: .\Encomenda_Veiculos\models.py:342
 msgid "Pre-PDI Date"
-msgstr ""
+msgstr "Data Pré-PDI"
 
 #: .\Encomenda_Veiculos\models.py:343
 msgid "PDI Request Date"
-msgstr ""
+msgstr "Data do Pedido de PDI"
 
 #: .\Encomenda_Veiculos\models.py:344
 msgid "PDI Completed Date"
-msgstr ""
+msgstr "Data de Conclusão do PDI"
 
 #: .\Encomenda_Veiculos\models.py:345
 msgid "PDI Notes"
-msgstr ""
+msgstr "Notas do PDI"
 
 #: .\Encomenda_Veiculos\models.py:346
 msgid "PDI Workshop"
-msgstr ""
+msgstr "Oficina PDI"
 
 #: .\Encomenda_Veiculos\models.py:353
 msgid "Stock Notes"
-msgstr ""
+msgstr "Notas de Stock"
 
 #: .\Encomenda_Veiculos\models.py:360 .\templates\base.html:27
 msgid "OCF Stock"
-msgstr ""
+msgstr "Stock OCF"
 
 #: .\Encomenda_Veiculos\models.py:361
 msgid "OCF Stocks"
-msgstr ""
+msgstr "Stocks OCF"
 
 #: .\templates\base.html:9
 msgid "Demo Booking App"
-msgstr ""
+msgstr "Aplicação de Demonstração de Reservas"
 
 #: .\templates\base.html:23
 msgid "Home"
-msgstr ""
+msgstr "Início"
 
 #: .\templates\base.html:24
 msgid "Salespersons"
-msgstr ""
+msgstr "Vendedores"
 
 #: .\templates\encomenda_veiculos\client_confirm_delete.html:5
 #: .\templates\encomenda_veiculos\clientcontact_confirm_delete.html:5
 #: .\templates\encomenda_veiculos\distributor_confirm_delete.html:5
 #, python-format
 msgid "Are you sure you want to delete %(object.name)s?"
-msgstr ""
+msgstr "Tem a certeza que quer apagar %(object.name)s?"
 
 #: .\templates\encomenda_veiculos\client_confirm_delete.html:8
 #: .\templates\encomenda_veiculos\distributor_confirm_delete.html:8
 #: .\templates\encomenda_veiculos\vp_confirm_delete.html:8
 msgid "Confirm Delete"
-msgstr ""
+msgstr "Confirmar Eliminação"
 
 #: .\templates\encomenda_veiculos\client_confirm_delete.html:10
 #: .\templates\encomenda_veiculos\clientcontact_confirm_delete.html:9
@@ -502,7 +503,7 @@ msgstr ""
 #: .\templates\encomenda_veiculos\internaltransport_confirm_delete.html:9
 #: .\templates\encomenda_veiculos\vp_confirm_delete.html:10
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: .\templates\encomenda_veiculos\client_detail.html:16
 #: .\templates\encomenda_veiculos\clientcontact_detail.html:8
@@ -512,7 +513,7 @@ msgstr ""
 #: .\templates\encomenda_veiculos\internaltransport_form.html:6
 #: .\templates\encomenda_veiculos\vp_detail.html:8
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: .\templates\encomenda_veiculos\client_detail.html:17
 #: .\templates\encomenda_veiculos\clientcontact_detail.html:9
@@ -520,94 +521,94 @@ msgstr ""
 #: .\templates\encomenda_veiculos\internaltransport_detail.html:10
 #: .\templates\encomenda_veiculos\vp_detail.html:9
 msgid "Delete"
-msgstr ""
+msgstr "Apagar"
 
 #: .\templates\encomenda_veiculos\client_form.html:6
 msgid "Edit Client"
-msgstr ""
+msgstr "Editar Cliente"
 
 #: .\templates\encomenda_veiculos\client_form.html:6
 msgid "Create Client"
-msgstr ""
+msgstr "Criar Cliente"
 
 #: .\templates\encomenda_veiculos\client_form.html:10
 #: .\templates\encomenda_veiculos\clientcontact_form.html:10
 #: .\templates\encomenda_veiculos\distributor_form.html:10
 #: .\templates\encomenda_veiculos\internaltransport_form.html:10
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 #: .\templates\encomenda_veiculos\client_list.html:6
 msgid "Create New Client"
-msgstr ""
+msgstr "Criar Novo Cliente"
 
 #: .\templates\encomenda_veiculos\clientcontact_confirm_delete.html:8
 #: .\templates\encomenda_veiculos\internaltransport_confirm_delete.html:8
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmar"
 
 #: .\templates\encomenda_veiculos\clientcontact_form.html:6
 #: .\templates\encomenda_veiculos\internaltransport_form.html:6
 #: .\templates\encomenda_veiculos\vp_form.html:10
 msgid "Create"
-msgstr ""
+msgstr "Criar"
 
 #: .\templates\encomenda_veiculos\clientcontact_list.html:11
 msgid "Add Client Contact"
-msgstr ""
+msgstr "Adicionar Contacto do Cliente"
 
 #: .\templates\encomenda_veiculos\distributor_form.html:6
 msgid "Edit Distributor"
-msgstr ""
+msgstr "Editar Distribuidor"
 
 #: .\templates\encomenda_veiculos\distributor_form.html:6
 msgid "Create Distributor"
-msgstr ""
+msgstr "Criar Distribuidor"
 
 #: .\templates\encomenda_veiculos\distributor_list.html:5
 msgid "Distributors"
-msgstr ""
+msgstr "Distribuidores"
 
 #: .\templates\encomenda_veiculos\distributor_list.html:6
 msgid "Create New Distributor"
-msgstr ""
+msgstr "Criar Novo Distribuidor"
 
 #: .\templates\encomenda_veiculos\home.html:6
 msgid "Welcome to Gestão de Stock"
-msgstr ""
+msgstr "Bem-vindo ao Gestão de Stock"
 
 #: .\templates\encomenda_veiculos\home.html:7
 msgid "This is a simple application to manage vehicle stock."
-msgstr ""
+msgstr "Esta é uma aplicação simples para gerir o stock de viaturas."
 
 #: .\templates\encomenda_veiculos\home.html:9
 msgid "You can manage clients, vehicles, and other entities."
-msgstr ""
+msgstr "Pode gerir clientes, viaturas e outras entidades."
 
 #: .\templates\encomenda_veiculos\home.html:10
 msgid "View Clients"
-msgstr ""
+msgstr "Ver Clientes"
 
 #: .\templates\encomenda_veiculos\internaltransport_confirm_delete.html:5
 msgid "Are you sure you want to delete this internal transport?"
-msgstr ""
+msgstr "Tem a certeza que quer apagar este transporte interno?"
 
 #: .\templates\encomenda_veiculos\internaltransport_detail.html:8
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: .\templates\encomenda_veiculos\internaltransport_list.html:11
 msgid "Add Internal Transport"
-msgstr ""
+msgstr "Adicionar Transporte Interno"
 
 #: .\templates\encomenda_veiculos\vp_confirm_delete.html:5
 msgid "Are you sure you want to delete"
-msgstr ""
+msgstr "Tem a certeza que quer apagar"
 
 #: .\templates\encomenda_veiculos\vp_form.html:6
 msgid "Create VP"
-msgstr ""
+msgstr "Criar VP"
 
 #: .\templates\encomenda_veiculos\vp_list.html:6
 msgid "Create New VP"
-msgstr ""
+msgstr "Criar Novo VP"
